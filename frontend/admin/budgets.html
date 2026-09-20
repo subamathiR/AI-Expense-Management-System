@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budgets — ExpenseAI Admin</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon" style="background: linear-gradient(135deg, #ef4444, #f97316);">A</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Admin Control Console</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Org Overview</a>
+        <a href="./users.html" class="nav-item">👥 Users & Roles</a>
+        <a href="./categories.html" class="nav-item">🏷 Categories</a>
+        <a href="./policies.html" class="nav-item">🛡 Policies</a>
+        <a href="./budgets.html" class="nav-item active">💰 Budgets</a>
+        <a href="./approval-rules.html" class="nav-item">⚙ Approval Rules</a>
+        <a href="./settings.html" class="nav-item">🔌 Integrations & Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" style="background: var(--danger);">AD</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">System Admin</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Administrator</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <div>
+          <h2>Departmental Budget Allocations</h2>
+          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.25rem;">Live corporate budget utilization and threshold tracking</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="../login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="table-container">
+          <table class="table" id="budgets-table">
+            <thead>
+              <tr>
+                <th>Budget Name</th>
+                <th>Total Allocation</th>
+                <th>Spent to Date</th>
+                <th>Consumption</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 2rem;" class="text-muted">Loading budgets from database...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Dashboard — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">M</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Manager Approval Portal</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item active">📊 Team Overview</a>
+        <a href="./approvals.html" class="nav-item">⏳ Pending Approvals</a>
+        <a href="./reports.html" class="nav-item">📁 Team Reports</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" style="background: var(--warning);">SJ</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">Sarah Johnson</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Team Manager</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Manager Approval Dashboard</h2>
+        <a href="../login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+      </header>
+
+      <main class="content-body">
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Pending Team Approvals</p>
+              <p class="stat-value">3</p>
+            </div>
+            <div class="stat-icon stat-icon-amber">⏳</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Total Team Spend</p>
+              <p class="stat-value">₹1,45,000</p>
+            </div>
+            <div class="stat-icon stat-icon-purple">💳</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Policy Violations</p>
+              <p class="stat-value">1</p>
+            </div>
+            <div class="stat-icon stat-icon-red">⚠</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Approved Claims</p>
+              <p class="stat-value">18</p>
+            </div>
+            <div class="stat-icon stat-icon-green">✓</div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h3>Pending Review Queue</h3>
+            <a href="./approvals.html" class="btn btn-primary">Review All (3)</a>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Claim Title & Vendor</th>
+                  <th>Amount</th>
+                  <th>Policy Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>John Smith</strong> (Engineering)</td>
+                  <td>Client Business Dinner (ABC Restaurant)</td>
+                  <td>₹4,500.00</td>
+                  <td><span class="badge badge-violation">Policy Violation</span></td>
+                  <td><a href="./expense-review.html" class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Review Claim</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Jane Doe</strong> (Marketing)</td>
+                  <td>Tech Summit Ticket</td>
+                  <td>₹12,000.00</td>
+                  <td><span class="badge badge-approved">Compliant</span></td>
+                  <td><a href="./expense-review.html" class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Review Claim</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

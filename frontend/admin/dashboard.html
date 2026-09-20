@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon" style="background: linear-gradient(135deg, #ef4444, #f97316);">A</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Admin Control Console</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item active">📊 Org Overview</a>
+        <a href="./users.html" class="nav-item">👥 Users & Roles</a>
+        <a href="./categories.html" class="nav-item">🏷 Categories</a>
+        <a href="./policies.html" class="nav-item">🛡 Policies</a>
+        <a href="./budgets.html" class="nav-item">💰 Budgets</a>
+        <a href="./approval-rules.html" class="nav-item">⚙ Approval Rules</a>
+        <a href="./settings.html" class="nav-item">🔌 Integrations</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" style="background: var(--danger);">AD</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">System Admin</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Administrator</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Organization FinTech Control Center</h2>
+        <a href="../login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+      </header>
+
+      <main class="content-body">
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Total Org Expenditure</p>
+              <p class="stat-value">₹9,45,000</p>
+            </div>
+            <div class="stat-icon stat-icon-purple">💳</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Active User Accounts</p>
+              <p class="stat-value">24</p>
+            </div>
+            <div class="stat-icon stat-icon-green">👥</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Budget Allocation Cap</p>
+              <p class="stat-value">₹23,00,000</p>
+            </div>
+            <div class="stat-icon stat-icon-amber">💰</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Flagged Risk Alerts</p>
+              <p class="stat-value">2</p>
+            </div>
+            <div class="stat-icon stat-icon-red">⚠</div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Budget Allowances — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">E</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Smart Expense Manager</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+        <a href="./expenses.html" class="nav-item">💳 Expenses</a>
+        <a href="./receipt-scan.html" class="nav-item">📑 Receipt Scan</a>
+        <a href="./reports.html" class="nav-item">📁 Reports</a>
+        <a href="./mileage.html" class="nav-item">🚗 Mileage</a>
+        <a href="./budget.html" class="nav-item active">💰 Budgets</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">JS</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">John Smith</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Employee</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Category Spending Allowances</h2>
+      </header>
+
+      <main class="content-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+          <div class="card">
+            <div class="card-header">
+              <h3>Travel & Transport</h3>
+              <span class="badge badge-submitted">80% Used</span>
+            </div>
+            <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">Spent <strong>₹80,000</strong> of <strong>₹1,00,000</strong> limit</p>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill warning" style="width: 80%;"></div>
+            </div>
+            <p style="font-size: 0.75rem; margin-top: 0.5rem;" class="text-warning">⚠ High usage: Spent 80% of budget with 2 months remaining.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Meals & Entertainment</h3>
+              <span class="badge badge-approved">45% Used</span>
+            </div>
+            <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">Spent <strong>₹22,500</strong> of <strong>₹50,000</strong> limit</p>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 45%;"></div>
+            </div>
+            <p style="font-size: 0.75rem; margin-top: 0.5rem;" class="text-muted">On track.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

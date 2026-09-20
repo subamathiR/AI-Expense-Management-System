@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings & Integrations — ExpenseAI Admin</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon" style="background: linear-gradient(135deg, #ef4444, #f97316);">A</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Admin Control Console</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Org Overview</a>
+        <a href="./users.html" class="nav-item">👥 Users & Roles</a>
+        <a href="./categories.html" class="nav-item">🏷 Categories</a>
+        <a href="./policies.html" class="nav-item">🛡 Policies</a>
+        <a href="./budgets.html" class="nav-item">💰 Budgets</a>
+        <a href="./approval-rules.html" class="nav-item">⚙ Approval Rules</a>
+        <a href="./settings.html" class="nav-item active">🔌 Integrations & Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" style="background: var(--danger);">AD</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">System Admin</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Administrator</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <div>
+          <h2>Enterprise Settings & AI Integrations</h2>
+          <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.25rem;">Configure OCR engines, ERP syncing adapters, and platform compliance parameters</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button id="ping-health-btn" class="btn btn-secondary">⚡ Ping Health API</button>
+          <a href="../login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+        </div>
+      </header>
+
+      <main class="content-body" style="display: flex; flex-direction: column; gap: 1.75rem;">
+        <!-- Live System Status Card -->
+        <div class="card" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(99, 102, 241, 0.25);">
+          <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.75rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+              <span style="font-size: 1.25rem;">🖥</span>
+              <div>
+                <h3 style="font-size: 1rem; font-weight: 600;">System Architecture & Microservices Health</h3>
+                <p class="text-muted" style="font-size: 0.75rem;">Live backend REST daemon and database telemetry</p>
+              </div>
+            </div>
+            <div id="ping-result">
+              <span class="badge badge-approved" style="font-size: 0.85rem;">Online (Healthy)</span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 0.75rem;">
+            <div>
+              <p class="text-muted" style="font-size: 0.75rem;">Backend Server Host</p>
+              <p style="font-weight: 600; font-family: monospace; font-size: 0.9rem; color: #a5b4fc;">http://localhost:5001</p>
+            </div>
+            <div>
+              <p class="text-muted" style="font-size: 0.75rem;">Database Connector</p>
+              <p style="font-weight: 600; font-size: 0.9rem; color: #34d399;">MongoDB (Port 27017) ✓</p>
+            </div>
+            <div>
+              <p class="text-muted" style="font-size: 0.75rem;">Environment</p>
+              <p style="font-weight: 600; font-size: 0.9rem; color: #fbbf24;">Development</p>
+            </div>
+            <div>
+              <p class="text-muted" style="font-size: 0.75rem;">Auth Token Strategy</p>
+              <p style="font-weight: 600; font-size: 0.9rem; color: #94a3b8;">JWT (HS256) · 7-Day Expire</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI, OCR & Financial Parameters Form -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 style="font-size: 1.1rem;">Platform Configuration Engine</h3>
+              <p class="text-muted" style="font-size: 0.8rem;">Adjust AI threshold confidence, default currency, and mileage parameters</p>
+            </div>
+          </div>
+
+          <form id="settings-form">
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+              <div class="form-group">
+                <label for="ocr-provider">Primary OCR Scanner Provider</label>
+                <select id="ocr-provider">
+                  <option value="tesseract" selected>Tesseract OCR Engine (Local Server-Side)</option>
+                  <option value="google_vision">Google Cloud Vision API (Cloud ML)</option>
+                </select>
+                <small class="text-muted" style="font-size: 0.75rem;">Automatic fallback enabled if cloud adapter fails</small>
+              </div>
+
+              <div class="form-group">
+                <label for="ocr-confidence">AI Categorization Confidence Threshold: <span id="confidence-val" style="color: var(--primary); font-weight: 700;">85%</span></label>
+                <input type="range" id="ocr-confidence" min="50" max="99" value="85" style="accent-color: var(--primary); width: 100%; cursor: pointer;" oninput="document.getElementById('confidence-val').innerText = this.value + '%'">
+                <small class="text-muted" style="font-size: 0.75rem;">Claims below threshold require manual line-item verification</small>
+              </div>
+
+              <div class="form-group">
+                <label for="base-currency">Base Operating Currency</label>
+                <select id="base-currency">
+                  <option value="USD" selected>USD — United States Dollar ($)</option>
+                  <option value="INR">INR — Indian Rupee (₹)</option>
+                  <option value="EUR">EUR — Euro (€)</option>
+                  <option value="GBP">GBP — British Pound (£)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="mileage-rate">Default Mileage Reimbursement Rate</label>
+                <div style="display: flex; gap: 0.5rem;">
+                  <input type="number" id="mileage-rate" step="0.01" value="0.50" style="flex: 2;">
+                  <select id="mileage-unit" style="flex: 1;">
+                    <option value="km" selected>per km</option>
+                    <option value="mi">per mile</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+              <button type="submit" id="save-settings-btn" class="btn btn-primary" style="padding: 0.75rem 2rem;">Save Enterprise Settings</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Connected ERP & Sync Adapters Table -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 style="font-size: 1.1rem;">Enterprise Integration & Accounting Sync Adapters</h3>
+              <p class="text-muted" style="font-size: 0.8rem;">External ERP connectors for bi-directional financial reconciliation</p>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Service Connector</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Sync Mode</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Tesseract OCR</strong></td>
+                  <td>Receipt Optical Extraction</td>
+                  <td><span class="badge badge-approved">Active</span></td>
+                  <td>Local Worker Daemon</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-secondary btn-test-sync" data-service="Tesseract OCR" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">Test Engine</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Google Cloud Vision</strong></td>
+                  <td>AI Document Vision</td>
+                  <td><span class="badge badge-submitted">Adapter Standby</span></td>
+                  <td>Cloud REST API</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-secondary btn-test-sync" data-service="Google Vision API" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">Verify Key</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Expensify Financial API</strong></td>
+                  <td>General Ledger Sync</td>
+                  <td><span class="badge badge-approved">Connected</span></td>
+                  <td>Automated Hourly Push</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-secondary btn-test-sync" data-service="Expensify API" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">Test Sync</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>SAP Concur Connector</strong></td>
+                  <td>Enterprise ERP</td>
+                  <td><span class="badge badge-approved">Connected</span></td>
+                  <td>Two-way Webhook</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-secondary btn-test-sync" data-service="SAP Concur" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">Test Sync</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>QuickBooks Online</strong></td>
+                  <td>Corporate Accounting</td>
+                  <td><span class="badge badge-submitted">Sync Ready</span></td>
+                  <td>OAuth 2.0 API</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-secondary btn-test-sync" data-service="QuickBooks Online" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">Test Connection</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Xero Cloud Accounting</strong></td>
+                  <td>Accounts Payable</td>
+                  <td><span class="badge badge-submitted">Sync Ready</span></td>
+                  <td>Batch Export</td>
+                  <td style="text-align: right;">
+                    <button class="btn btn-secondary btn-test-sync" data-service="Xero" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">Test Connection</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

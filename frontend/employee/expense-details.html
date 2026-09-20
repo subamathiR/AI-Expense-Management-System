@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Claim Details — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">E</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Smart Expense Manager</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+        <a href="./expenses.html" class="nav-item active">💳 Expenses</a>
+        <a href="./receipt-scan.html" class="nav-item">📑 Receipt Scan</a>
+        <a href="./reports.html" class="nav-item">📁 Reports</a>
+        <a href="./mileage.html" class="nav-item">🚗 Mileage</a>
+        <a href="./budget.html" class="nav-item">💰 Budgets</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">JS</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">John Smith</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Employee</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Expense Claim Details</h2>
+        <a href="./expenses.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Back</a>
+      </header>
+
+      <main class="content-body" style="max-width: 900px;">
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <div>
+              <h3>Business Dinner (ABC Restaurant)</h3>
+              <p style="font-size: 0.875rem;" class="text-muted">Submitted on August 09, 2026</p>
+            </div>
+            <span class="badge badge-submitted">Submitted</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div>
+              <p class="text-muted" style="font-size: 0.875rem;">Amount Claimed</p>
+              <p style="font-size: 1.5rem; font-weight: 800; color: var(--text-main);">₹2,450.00</p>
+            </div>
+            <div>
+              <p class="text-muted" style="font-size: 0.875rem;">Category</p>
+              <p style="font-weight: 600; color: var(--text-main);">Meals & Entertainment</p>
+            </div>
+            <div>
+              <p class="text-muted" style="font-size: 0.875rem;">AI Confidence Score</p>
+              <span class="badge badge-approved">96% Verified</span>
+            </div>
+          </div>
+
+          <div class="alert alert-info">
+            <span>✓ <strong>Policy Compliance Check Passed:</strong> Expense conforms to company meal allowance rules (< ₹3,000 per transaction).</span>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 1rem;">
+            <h4>Business Description</h4>
+            <p style="margin-top: 0.5rem;">Client dinner discussion regarding Q4 contract renewal with key enterprise account representatives.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

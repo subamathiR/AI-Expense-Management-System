@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Reports — ExpenseAI Manager</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">M</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Manager Approval Portal</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Team Overview</a>
+        <a href="./approvals.html" class="nav-item">⏳ Pending Approvals</a>
+        <a href="./reports.html" class="nav-item active">📁 Team Reports</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" style="background: var(--warning);">SJ</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">Sarah Johnson</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Team Manager</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Team Expense Reports</h2>
+      </header>
+
+      <main class="content-body">
+        <div class="card">
+          <div class="card-header">
+            <h3>Submitted Team Expense Bundles</h3>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Report Title</th>
+                  <th>Total Claims</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John Smith</td>
+                  <td>August 2026 Travel & Client Batch</td>
+                  <td>₹18,000.00</td>
+                  <td><span class="badge badge-submitted">Submitted</span></td>
+                  <td><button class="btn btn-primary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">Approve Report</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

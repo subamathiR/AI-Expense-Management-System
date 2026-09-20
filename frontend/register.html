@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — ExpenseAI</title>
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/forms.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem; background: radial-gradient(circle at 50% 15%, rgba(5, 150, 105, 0.08) 0%, #f8fafc 65%);">
+  <main class="card" style="max-width: 480px; width: 100%; box-shadow: 0 20px 35px -10px rgba(16, 24, 40, 0.08), 0 1px 3px rgba(16, 24, 40, 0.04); border: 1px solid #e2e8f0;">
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <div class="logo-icon" style="margin: 0 auto 1rem auto; width: 48px; height: 48px; font-size: 1.5rem;">E</div>
+      <h2>Create Account</h2>
+      <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.25rem;">Register employee or manager credentials</p>
+    </div>
+
+    <form action="./login.html">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" required placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" required placeholder="Doe">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Work Email</label>
+        <input type="email" id="email" required placeholder="jane@company.com">
+      </div>
+
+      <div class="form-group">
+        <label for="department">Department</label>
+        <select id="department">
+          <option value="Engineering">Engineering</option>
+          <option value="Sales">Sales & Marketing</option>
+          <option value="Finance">Finance</option>
+          <option value="Executive">Executive</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="••••••••">
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%;">Complete Registration</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem;">
+      <span class="text-muted">Already registered?</span>
+      <a href="./login.html" class="text-primary" style="font-weight: 600; margin-left: 0.25rem;">Sign In</a>
+    </div>
+  </main>
+  <script src="./js/utils.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/auth.js"></script>
+</body>
+</html>

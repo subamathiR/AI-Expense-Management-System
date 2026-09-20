@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Dashboard — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Nav -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">E</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Smart Expense Manager</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item active">📊 Dashboard</a>
+        <a href="./expenses.html" class="nav-item">💳 Expenses</a>
+        <a href="./receipt-scan.html" class="nav-item">📑 Receipt Scan</a>
+        <a href="./reports.html" class="nav-item">📁 Reports</a>
+        <a href="./mileage.html" class="nav-item">🚗 Mileage</a>
+        <a href="./budget.html" class="nav-item">💰 Budgets</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">JS</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">John Smith</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Employee</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Body -->
+    <div class="main-content">
+      <header class="header">
+        <h2>Employee Dashboard</h2>
+        <a href="../login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+      </header>
+
+      <main class="content-body">
+        <!-- Stat Cards Grid -->
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Total Expenses</p>
+              <p class="stat-value">₹45,500</p>
+            </div>
+            <div class="stat-icon stat-icon-purple">💳</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Pending Approval</p>
+              <p class="stat-value">₹8,500</p>
+            </div>
+            <div class="stat-icon stat-icon-amber">⏳</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Approved Claims</p>
+              <p class="stat-value">₹25,000</p>
+            </div>
+            <div class="stat-icon stat-icon-green">✓</div>
+          </div>
+          <div class="stat-card">
+            <div>
+              <p class="stat-title">Reimbursed Amount</p>
+              <p class="stat-value">₹12,000</p>
+            </div>
+            <div class="stat-icon stat-icon-purple">💵</div>
+          </div>
+        </section>
+
+        <!-- Budget Usage Progress -->
+        <section class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <h3>Monthly Budget Allowance Utilization</h3>
+            <span class="badge badge-submitted">72% Used</span>
+          </div>
+          <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">Spent <strong>₹36,000</strong> of <strong>₹50,000</strong> monthly allocation.</p>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill warning" style="width: 72%;"></div>
+          </div>
+        </section>
+
+        <!-- Recent Expenses Table -->
+        <section class="card">
+          <div class="card-header">
+            <h3>Recent Expenses</h3>
+            <a href="./add-expense.html" class="btn btn-primary">+ Add New Expense</a>
+          </div>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Title & Vendor</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Client Business Lunch</strong> (Bistro Lumiere)</td>
+                  <td>Meals & Entertainment</td>
+                  <td>2026-08-20</td>
+                  <td>₹2,450.00</td>
+                  <td><span class="badge badge-submitted">Submitted</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Software Subscription</strong> (GitHub Enterprise)</td>
+                  <td>Software</td>
+                  <td>2026-08-18</td>
+                  <td>₹1,800.00</td>
+                  <td><span class="badge badge-approved">Approved</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Client Travel Flight</strong> (Delta Air)</td>
+                  <td>Travel</td>
+                  <td>2026-08-15</td>
+                  <td>₹12,500.00</td>
+                  <td><span class="badge badge-reimbursed">Reimbursed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

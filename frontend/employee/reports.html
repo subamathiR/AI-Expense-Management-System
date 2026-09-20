@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Reports — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">E</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Smart Expense Manager</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+        <a href="./expenses.html" class="nav-item">💳 Expenses</a>
+        <a href="./receipt-scan.html" class="nav-item">📑 Receipt Scan</a>
+        <a href="./reports.html" class="nav-item active">📁 Reports</a>
+        <a href="./mileage.html" class="nav-item">🚗 Mileage</a>
+        <a href="./budget.html" class="nav-item">💰 Budgets</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">JS</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">John Smith</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Employee</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Batch Expense Reports</h2>
+        <button class="btn btn-primary">+ Create New Report</button>
+      </header>
+
+      <main class="content-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          <div class="card">
+            <div class="card-header">
+              <h3>August 2026 Travel & Client Batch</h3>
+              <span class="badge badge-submitted">Submitted</span>
+            </div>
+            <p style="font-size: 0.875rem;" class="text-muted">Grouped claim bundle for August travel.</p>
+            <div style="margin: 1rem 0; font-size: 1.25rem; font-weight: 800; color: var(--text-main);">₹18,000.00</div>
+            <p style="font-size: 0.75rem;" class="text-muted">Contains 4 itemized expenses</p>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Q3 Tech & Office Supplies Batch</h3>
+              <span class="badge badge-approved">Approved</span>
+            </div>
+            <p style="font-size: 0.875rem;" class="text-muted">Office equipment and domain renewals.</p>
+            <div style="margin: 1rem 0; font-size: 1.25rem; font-weight: 800; color: var(--text-main);">₹6,500.00</div>
+            <p style="font-size: 0.75rem;" class="text-muted">Contains 2 itemized expenses</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

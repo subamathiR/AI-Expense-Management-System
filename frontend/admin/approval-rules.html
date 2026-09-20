@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Approval Rules — ExpenseAI Admin</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon" style="background: linear-gradient(135deg, #ef4444, #f97316);">A</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Admin Control Console</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Org Overview</a>
+        <a href="./users.html" class="nav-item">👥 Users & Roles</a>
+        <a href="./categories.html" class="nav-item">🏷 Categories</a>
+        <a href="./policies.html" class="nav-item">🛡 Policies</a>
+        <a href="./budgets.html" class="nav-item">💰 Budgets</a>
+        <a href="./approval-rules.html" class="nav-item active">⚙ Approval Rules</a>
+        <a href="./settings.html" class="nav-item">🔌 Integrations</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar" style="background: var(--danger);">AD</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">System Admin</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Administrator</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Multi-Level Approval Threshold Rules</h2>
+      </header>
+
+      <main class="content-body">
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Threshold Range</th>
+                <th>Required Approval Tier</th>
+                <th>Route Workflow</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>< ₹5,000</strong></td>
+                <td>Level 1</td>
+                <td>Manager Review</td>
+              </tr>
+              <tr>
+                <td><strong>₹5,000 – ₹25,000</strong></td>
+                <td>Level 2</td>
+                <td>Manager + Finance Review</td>
+              </tr>
+              <tr>
+                <td><strong>> ₹25,000</strong></td>
+                <td>Level 3</td>
+                <td>Manager + Finance + Executive Admin Review</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

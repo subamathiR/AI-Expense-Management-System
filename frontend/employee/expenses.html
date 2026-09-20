@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Expenses — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/tables.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">E</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Smart Expense Manager</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+        <a href="./expenses.html" class="nav-item active">💳 Expenses</a>
+        <a href="./receipt-scan.html" class="nav-item">📑 Receipt Scan</a>
+        <a href="./reports.html" class="nav-item">📁 Reports</a>
+        <a href="./mileage.html" class="nav-item">🚗 Mileage</a>
+        <a href="./budget.html" class="nav-item">💰 Budgets</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">JS</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">John Smith</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Employee</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Personal Expenses</h2>
+        <a href="./add-expense.html" class="btn btn-primary">+ New Expense</a>
+      </header>
+
+      <main class="content-body">
+        <!-- Filter Toolbar -->
+        <div class="card" style="margin-bottom: 1.5rem; padding: 1rem;">
+          <div class="form-grid">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="search">Search</label>
+              <input type="text" id="search" placeholder="Search vendor, title...">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="statusFilter">Status</label>
+              <select id="statusFilter">
+                <option value="">All Statuses</option>
+                <option value="submitted">Submitted</option>
+                <option value="approved">Approved</option>
+                <option value="reimbursed">Reimbursed</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="catFilter">Category</label>
+              <select id="catFilter">
+                <option value="">All Categories</option>
+                <option value="Meals">Meals</option>
+                <option value="Travel">Travel</option>
+                <option value="Software">Software</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expense Table -->
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Title & Vendor</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Policy Alert</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Business Dinner</strong> (ABC Restaurant)</td>
+                <td>Meals & Entertainment</td>
+                <td>2026-08-09</td>
+                <td>₹2,450.00</td>
+                <td><span class="badge badge-approved">Compliant</span></td>
+                <td><span class="badge badge-submitted">Submitted</span></td>
+                <td><a href="./expense-details.html" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">View Details</a></td>
+              </tr>
+              <tr>
+                <td><strong>San Francisco Flight</strong> (Delta Airlines)</td>
+                <td>Travel</td>
+                <td>2026-08-05</td>
+                <td>₹25,000.00</td>
+                <td><span class="badge badge-violation">Policy Violation</span></td>
+                <td><span class="badge badge-under-review">Under Review</span></td>
+                <td><a href="./expense-details.html" class="btn btn-secondary" style="padding: 0.25rem 0.75rem; font-size: 0.75rem;">View Details</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>

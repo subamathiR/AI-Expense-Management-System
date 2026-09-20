@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — ExpenseAI</title>
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/forms.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem; background: radial-gradient(circle at 50% 15%, rgba(5, 150, 105, 0.08) 0%, #f8fafc 65%);">
+  <main class="card" style="max-width: 420px; width: 100%; box-shadow: 0 20px 35px -10px rgba(16, 24, 40, 0.08), 0 1px 3px rgba(16, 24, 40, 0.04); border: 1px solid #e2e8f0;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <div class="logo-icon" style="margin: 0 auto 1rem auto; width: 48px; height: 48px; font-size: 1.5rem;">E</div>
+      <h2>Welcome Back</h2>
+      <p class="text-muted" style="font-size: 0.875rem; margin-top: 0.25rem;">Sign in to your ExpenseAI workspace</p>
+    </div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" required placeholder="name@company.com">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="••••••••">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label for="role">Select Demo Role Target</label>
+        <select id="role">
+          <option value="employee">Employee Dashboard</option>
+          <option value="manager">Manager Approvals Portal</option>
+          <option value="admin">System Admin Console</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem;">
+      <span class="text-muted">Don't have an account?</span>
+      <a href="./register.html" class="text-primary" style="font-weight: 600; margin-left: 0.25rem;">Register</a>
+    </div>
+  </main>
+  <script src="./js/utils.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/auth.js"></script>
+</body>
+</html>

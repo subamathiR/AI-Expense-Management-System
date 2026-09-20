@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt Scanner — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/receipt.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">E</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Smart Expense Manager</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+        <a href="./expenses.html" class="nav-item">💳 Expenses</a>
+        <a href="./receipt-scan.html" class="nav-item active">📑 Receipt Scan</a>
+        <a href="./reports.html" class="nav-item">📁 Reports</a>
+        <a href="./mileage.html" class="nav-item">🚗 Mileage</a>
+        <a href="./budget.html" class="nav-item">💰 Budgets</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">JS</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">John Smith</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Employee</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>AI Receipt OCR Scanner</h2>
+      </header>
+
+      <main class="content-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+          <!-- Upload Area -->
+          <div class="card">
+            <h3 style="margin-bottom: 1rem;">Upload or Capture Receipt</h3>
+            <div class="dropzone">
+              <div class="dropzone-icon">📷</div>
+              <p style="font-weight: 600; margin-bottom: 0.25rem;">Drag & Drop Receipt File Here</p>
+              <p style="font-size: 0.75rem;" class="text-muted">Supports JPG, PNG, or PDF up to 10MB</p>
+              <input type="file" style="position: absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;">
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">⚡ Run AI OCR Extraction</button>
+          </div>
+
+          <!-- Extracted Fields Preview -->
+          <div class="extraction-card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
+              <h3>AI Extracted Information</h3>
+              <span class="badge badge-approved">96% Confidence</span>
+            </div>
+
+            <form action="./expenses.html">
+              <div class="form-group">
+                <label for="vendor">Vendor / Merchant</label>
+                <input type="text" id="vendor" value="ABC Restaurant">
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="amount">Total Amount</label>
+                  <input type="number" id="amount" value="2450.00">
+                </div>
+                <div class="form-group">
+                  <label for="currency">Currency</label>
+                  <select id="currency">
+                    <option value="INR">INR (₹)</option>
+                    <option value="USD">USD ($)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="date">Date</label>
+                  <input type="date" id="date" value="2026-08-09">
+                </div>
+                <div class="form-group">
+                  <label for="category">AI Suggested Category</label>
+                  <select id="category">
+                    <option value="Meals" selected>Meals & Entertainment</option>
+                    <option value="Travel">Travel</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-success" style="width: 100%; margin-top: 1rem;">Confirm & Save Expense</button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

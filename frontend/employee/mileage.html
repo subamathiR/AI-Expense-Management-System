@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mileage Log & Calculator — ExpenseAI</title>
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/forms.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">E</div>
+        <div>
+          <h3 style="font-size: 1.1rem;">ExpenseAI</h3>
+          <p style="font-size: 0.75rem;" class="text-muted">Smart Expense Manager</p>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="./dashboard.html" class="nav-item">📊 Dashboard</a>
+        <a href="./expenses.html" class="nav-item">💳 Expenses</a>
+        <a href="./receipt-scan.html" class="nav-item">📑 Receipt Scan</a>
+        <a href="./reports.html" class="nav-item">📁 Reports</a>
+        <a href="./mileage.html" class="nav-item active">🚗 Mileage</a>
+        <a href="./budget.html" class="nav-item">💰 Budgets</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="user-avatar">JS</div>
+          <div>
+            <p style="font-size: 0.875rem; font-weight: 600;">John Smith</p>
+            <p style="font-size: 0.75rem;" class="text-muted">Employee</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-content">
+      <header class="header">
+        <h2>Business Travel Mileage Calculator</h2>
+      </header>
+
+      <main class="content-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+          <form id="mileage-form" class="card">
+            <h3 style="margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">Trip Information</h3>
+
+            <div class="form-group">
+              <label for="start">Starting Location</label>
+              <input type="text" id="start" value="Headquarters Office">
+            </div>
+
+            <div class="form-group">
+              <label for="dest">Destination Location</label>
+              <input type="text" id="dest" value="Client Site - Tech Park">
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="distance">Distance (km)</label>
+                <input type="number" id="distance" value="55">
+              </div>
+              <div class="form-group">
+                <label for="rate">Rate per km (₹)</label>
+                <input type="number" id="rate" value="10" readonly>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Submit Mileage Claim (₹550.00)</button>
+          </form>
+
+          <div class="card" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🚗</div>
+            <h3>Automated Reimbursement</h3>
+            <p class="text-muted" style="margin-top: 0.5rem; font-size: 0.875rem;">Calculated <strong>55 km</strong> @ <strong>₹10/km</strong> standard reimbursement rate = <strong>₹550.00</strong></p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="../js/utils.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/mileage.js"></script>
+</body>
+</html>
