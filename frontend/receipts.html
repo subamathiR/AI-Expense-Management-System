@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt Scanner & AI OCR — ExpenseAI</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-header" id="app-header"></header>
+
+      <div class="app-content">
+        <!-- Split View: Scanner Preview on Left, Extracted Form on Right -->
+        <div class="ocr-split-view">
+          <!-- Left: Receipt Viewer & Dropzone -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">
+                  <i data-lucide="scan" style="color: var(--brand-primary);"></i>
+                  Receipt Document Inspector
+                </div>
+                <div class="card-subtitle">Drop JPG, PNG, or PDF file to execute OCR analysis</div>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="document.getElementById('receipt-scan-input').click()">
+                <i data-lucide="upload"></i> Upload File
+              </button>
+              <input type="file" id="receipt-scan-input" accept="image/*,application/pdf" style="display: none;">
+            </div>
+
+            <div class="card-body">
+              <div class="receipt-image-preview-box" id="preview-container">
+                <div id="scanner-placeholder" class="text-center" style="padding: 40px;">
+                  <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--surface-card); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--accent-sage);">
+                    <i data-lucide="file-image" style="width: 32px; height: 32px;"></i>
+                  </div>
+                  <h4 style="margin-bottom: 6px;">No Receipt Loaded</h4>
+                  <p style="font-size: 13px; max-width: 300px; margin: 0 auto 16px;">
+                    Upload a receipt or choose one of our sample receipt vouchers below.
+                  </p>
+                  <div class="flex justify-center gap-xs" style="flex-wrap: wrap;">
+                    <button class="btn btn-secondary btn-sm" onclick="loadSampleReceipt('delta')">Sample Airline Ticket</button>
+                    <button class="btn btn-secondary btn-sm" onclick="loadSampleReceipt('restaurant')">Sample Restaurant Bill</button>
+                    <button class="btn btn-secondary btn-sm" onclick="loadSampleReceipt('office')">Sample Staples Receipt</button>
+                  </div>
+                </div>
+                <img id="active-receipt-img" src="" style="display: none; max-height: 440px;">
+              </div>
+
+              <!-- Raw OCR Text Toggle -->
+              <div style="margin-top: 14px;">
+                <details style="font-size: 12px; color: var(--text-secondary); cursor: pointer;">
+                  <summary style="font-weight: 600; margin-bottom: 6px;">View Raw Extracted OCR Text</summary>
+                  <pre id="raw-ocr-text" style="background: var(--surface-muted); padding: 10px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 11px; white-space: pre-wrap; max-height: 140px; overflow-y: auto;">Awaiting document...</pre>
+                </details>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Editable Extracted Fields -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Extracted Metadata & Classification</div>
+                <div class="card-subtitle">Review extracted fields and modify before saving</div>
+              </div>
+              <div id="confidence-container">
+                <span class="confidence-meter high"><i data-lucide="sparkles"></i> AI Ready</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <form id="ocr-review-form">
+                <input type="hidden" id="ocr-receipt-id" value="">
+
+                <div class="form-group">
+                  <label class="form-label">Vendor / Merchant Name <span class="required">*</span></label>
+                  <input type="text" id="ocr-vendor" class="form-control" placeholder="Extracted merchant name" required>
+                </div>
+
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Total Amount <span class="required">*</span></label>
+                    <div class="input-group">
+                      <span class="input-prefix">$</span>
+                      <input type="number" step="0.01" id="ocr-total" class="form-control" placeholder="0.00" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Transaction Date <span class="required">*</span></label>
+                    <input type="date" id="ocr-date" class="form-control" required>
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Tax Amount</label>
+                    <input type="number" step="0.01" id="ocr-tax" class="form-control" placeholder="0.00">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Subtotal Amount</label>
+                    <input type="number" step="0.01" id="ocr-subtotal" class="form-control" placeholder="0.00">
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">AI Suggested Category <span class="required">*</span></label>
+                    <select id="ocr-category" class="form-control" required>
+                      <option value="Travel">Travel</option>
+                      <option value="Meals & Entertainment">Meals & Entertainment</option>
+                      <option value="Office Supplies">Office Supplies</option>
+                      <option value="Software & Subscriptions">Software & Subscriptions</option>
+                      <option value="Accommodation">Accommodation</option>
+                      <option value="Transportation">Transportation</option>
+                      <option value="Utilities">Utilities</option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Equipment">Equipment</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Payment Method</label>
+                    <input type="text" id="ocr-payment" class="form-control" placeholder="e.g. Corporate Card (Visa)">
+                  </div>
+                </div>
+
+                <!-- Explainable Anomaly Check Warning -->
+                <div id="ocr-duplicate-warning" style="display: none; margin-bottom: var(--space-md);"></div>
+
+                <div class="flex gap-md" style="margin-top: var(--space-xl);">
+                  <button type="button" class="btn btn-secondary w-full" onclick="resetReviewForm()">
+                    <i data-lucide="rotate-ccw"></i> Reset
+                  </button>
+                  <button type="submit" class="btn btn-primary w-full" id="save-ocr-btn">
+                    <i data-lucide="check"></i> Confirm & Save Expense
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Historical Uploads Gallery -->
+        <div class="card" id="receipts-repository" style="margin-top: var(--space-xl);">
+          <div class="card-header">
+            <div class="card-title">Receipts Repository</div>
+            <div class="card-subtitle">Encrypted stored receipts with duplicate hash verification</div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Uploaded Date</th>
+                  <th>File Name</th>
+                  <th>Extracted Vendor</th>
+                  <th>Total Amount</th>
+                  <th>OCR Confidence</th>
+                  <th>File Hash (SHA256)</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="receipts-gallery-tbody">
+                <tr>
+                  <td colspan="7" style="text-align: center; padding: 25px; color: var(--text-muted);">
+                    Loading receipts repository...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Receipt Image Preview Modal -->
+  <div class="modal-backdrop" id="receipt-preview-modal" onclick="handlePreviewBackdropClick(event)">
+    <div class="modal-dialog" style="max-width: 820px; width: 95vw; max-height: 92vh;">
+      <div class="modal-header">
+        <div>
+          <div class="card-title" id="preview-modal-title">Receipt Preview</div>
+          <div class="card-subtitle" id="preview-modal-subtitle">Original captured image voucher</div>
+        </div>
+        <div class="flex gap-xs items-center">
+          <button type="button" class="btn-icon" onclick="zoomReceiptImage(-0.25)" title="Zoom Out" id="preview-zoom-out">
+            <i data-lucide="zoom-out"></i>
+          </button>
+          <button type="button" class="btn-icon" onclick="resetReceiptZoom()" title="Reset Zoom" id="preview-zoom-reset" style="font-size: 11px; font-weight: 600; width: auto; padding: 0 8px;">
+            100%
+          </button>
+          <button type="button" class="btn-icon" onclick="zoomReceiptImage(0.25)" title="Zoom In" id="preview-zoom-in">
+            <i data-lucide="zoom-in"></i>
+          </button>
+          <button type="button" class="btn-icon" onclick="closeReceiptModal()" title="Close Preview" id="close-preview-btn" style="margin-left: 8px;">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding: var(--space-md); text-align: center; background: #071510; display: flex; align-items: center; justify-content: center; min-height: 380px; max-height: calc(92vh - 150px); overflow: auto;">
+        <img id="receipt-modal-img" src="" alt="Receipt Document" style="max-width: 100%; max-height: calc(92vh - 180px); object-fit: contain; border-radius: var(--radius-xs); transition: transform 0.2s ease; transform-origin: center center; display: none;">
+        <div id="receipt-modal-loading" style="padding: 40px; color: var(--text-muted); display: none;">
+          <div class="spinner" style="margin: 0 auto 10px;"></div>
+          <span>Loading receipt image...</span>
+        </div>
+        <div id="receipt-modal-error" style="display: none; padding: 30px; color: #DC2626;">
+          <i data-lucide="alert-circle" style="width: 36px; height: 36px; margin: 0 auto 10px; display: block;"></i>
+          <span id="receipt-modal-error-text">Failed to display receipt image.</span>
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; gap: var(--space-sm); flex-wrap: wrap;">
+        <div id="preview-file-info" style="font-size: 12px; color: var(--text-muted); font-family: var(--font-mono); text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 50%;">
+        </div>
+        <div class="flex gap-sm items-center">
+          <button type="button" class="btn btn-danger" id="preview-delete-btn" onclick="openDeleteReceiptConfirm()">
+            <i data-lucide="trash-2"></i> Delete
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="closeReceiptModal()" id="preview-close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Receipt Confirmation Modal -->
+  <div class="modal-backdrop" id="delete-receipt-confirm-modal" style="z-index: 1050;" onclick="handleDeleteConfirmBackdropClick(event)">
+    <div class="modal-dialog" style="max-width: 440px; width: 92vw;">
+      <div class="modal-header">
+        <div class="card-title" style="color: #DC2626;">
+          <i data-lucide="alert-triangle"></i>
+          Delete Receipt
+        </div>
+        <button type="button" class="btn-icon" onclick="closeDeleteReceiptConfirm()" title="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: var(--space-lg) var(--space-xl);">
+        <p style="font-size: var(--font-sm); color: var(--text-secondary); margin-bottom: var(--space-md); line-height: 1.5;">
+          Are you sure you want to delete this receipt? This will permanently delete the receipt image and its database record.
+        </p>
+        <div id="delete-receipt-target-info" style="font-size: var(--font-xs); font-family: var(--font-mono); color: var(--text-muted); background: var(--surface-muted); padding: 8px 12px; border-radius: var(--radius-xs); word-break: break-all;">
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: var(--space-sm);">
+        <button type="button" class="btn btn-secondary" onclick="closeDeleteReceiptConfirm()" id="cancel-delete-receipt-btn">Cancel</button>
+        <button type="button" class="btn btn-danger" onclick="executeReceiptDeletion()" id="confirm-delete-receipt-btn">
+          <i data-lucide="trash-2"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .highlight-row {
+      background-color: var(--accent-mint-light) !important;
+      box-shadow: inset 4px 0 0 var(--brand-primary);
+      animation: receiptRowPulse 2.5s ease-out;
+    }
+    @keyframes receiptRowPulse {
+      0% {
+        background-color: var(--accent-gold-light);
+      }
+      50% {
+        background-color: var(--accent-mint-light);
+      }
+      100% {
+        background-color: var(--accent-mint-subtle);
+      }
+    }
+  </style>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/receipts.js"></script>
+</body>
+</html>

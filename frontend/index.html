@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExpenseAI — Every Expense. Understood.</title>
+  <meta name="description"
+    content="AI-Powered Expense Management System. Capture receipts, classify purchases, enforce corporate policies, monitor budgets, and streamline approvals with autonomous intelligence.">
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header class="landing-nav">
+    <div class="container landing-nav-inner">
+      <a href="index.html" class="brand-logo-wrap">
+        <div class="brand-logo-icon">
+          <i data-lucide="sparkles"></i>
+        </div>
+        <div class="brand-logo-text">Expense<span>AI</span></div>
+      </a>
+
+      <ul class="landing-nav-links">
+        <li><a href="index.html" class="landing-nav-link active"><i data-lucide="home"
+              style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i>Home</a>
+        </li>
+        <li><a href="#features" class="landing-nav-link">Features</a></li>
+        <li><a href="#workflow" class="landing-nav-link">How it Works</a></li>
+        <li><a href="dashboard.html" class="landing-nav-link">Dashboard</a></li>
+      </ul>
+
+      <div class="flex items-center gap-sm" id="landing-auth-actions">
+        <a href="login.html" class="btn btn-ghost btn-sm">Sign In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-pill">
+          <i data-lucide="sparkles" class="hero-pill-sparkle"></i>
+          Next-Gen Autonomous Financial Operations
+        </div>
+        <h1 class="hero-title">
+          Every Expense. <span class="highlight-text">Understood.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Transform expense management with intelligent receipt scanning, automated expense categorization, real-time
+          policy checks, and streamlined approval workflows. From receipt capture to reimbursement reporting, ExpenseAI
+          helps businesses simplify financial operations, detect unusual spending, and gain clearer insights into their
+          expenses.
+        </p>
+
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary btn-lg">
+            <span>Get Started Free</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+          <a href="dashboard.html" class="btn btn-gold btn-lg">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Open Dashboard</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Banner -->
+  <section class="stats-banner">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-metric-number">99.2%</div>
+          <div class="stat-metric-label">Receipt Data Extraction Accuracy</div>
+        </div>
+        <div>
+          <div class="stat-metric-number">4.2x</div>
+          <div class="stat-metric-label">Faster Reimbursement Turnaround</div>
+        </div>
+        <div>
+          <div class="stat-metric-number">100%</div>
+          <div class="stat-metric-label">Corporate Policy Audit Coverage</div>
+        </div>
+        <div>
+          <div class="stat-metric-number">0%</div>
+          <div class="stat-metric-label">Spreadsheet Headaches</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features Section -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Autonomous Capabilities</div>
+        <h2 class="section-title">Engineered for Precision & Financial Control</h2>
+        <p class="section-subtitle">
+          ExpenseAI unifies computer vision, deterministic policy checks, and smart workflows into a coherent corporate
+          platform.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <i data-lucide="scan-text"></i>
+          </div>
+          <h3 class="feature-title">Intelligent Receipt OCR</h3>
+          <p class="feature-desc">
+            Instantly scans receipt images and PDFs using client-side & server-side OCR. Automatically extracts vendor
+            name, line items, transaction date, tax, and currency.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <i data-lucide="tag"></i>
+          </div>
+          <h3 class="feature-title">Smart Categorization</h3>
+          <p class="feature-desc">
+            Machine intelligence classifies purchases across Travel, Meals, Office Supplies, and Software, learning
+            corporate tax codes and departmental ledger rules.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <h3 class="feature-title">Deterministic Policy Engine</h3>
+          <p class="feature-desc">
+            Enforce spending limits per category, daily thresholds, and receipt requirements. Flag non-compliant
+            submissions before they reach managers.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <i data-lucide="copy-check"></i>
+          </div>
+          <h3 class="feature-title">Fraud & Duplicate Guard</h3>
+          <p class="feature-desc">
+            Identifies duplicate receipt uploads, matching vendor/date/amount combinations, and atypical spikes using
+            explainable anomaly detection.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <i data-lucide="pie-chart"></i>
+          </div>
+          <h3 class="feature-title">Dynamic Budget Tracking</h3>
+          <p class="feature-desc">
+            Monitor department and category budgets in real-time. Receive proactive threshold alerts (e.g. 80% used)
+            before team limits are breached.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">
+            <i data-lucide="map-pin"></i>
+          </div>
+          <h3 class="feature-title">Mileage & Route Tracking</h3>
+          <p class="feature-desc">
+            Calculate accurate mileage reimbursements using start and destination coordinates or odometer logs based on
+            IRS and corporate standard rates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Step Workflow -->
+  <section class="workflow-section" id="workflow">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Streamlined Flow</div>
+        <h2 class="section-title">From Receipt Snap to Settled Reimbursement</h2>
+        <p class="section-subtitle">
+          Three frictionless steps eliminate days of paperwork and tedious email approvals.
+        </p>
+      </div>
+
+      <div class="workflow-grid">
+        <div class="workflow-step-card">
+          <div class="step-number">1</div>
+          <h3 class="feature-title">Snap or Drop Receipts</h3>
+          <p class="feature-desc">
+            Upload single receipts, PDF invoices, or mileage trips on desktop or mobile. Our OCR engine parses vendor,
+            amounts, taxes, and dates in seconds.
+          </p>
+        </div>
+
+        <div class="workflow-step-card">
+          <div class="step-number">2</div>
+          <h3 class="feature-title">AI Audit & Verification</h3>
+          <p class="feature-desc">
+            The rules engine cross-checks company limits, flags duplicates, applies currency conversion, and verifies
+            tax splits with zero delay.
+          </p>
+        </div>
+
+        <div class="workflow-step-card">
+          <div class="step-number">3</div>
+          <h3 class="feature-title">Multi-Tier Approval & Payout</h3>
+          <p class="feature-desc">
+            Managers approve in one click from desktop or email. Finance teams monitor payment batches and sync directly
+            with accounting software.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Final CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <h2 style="font-size: var(--font-3xl); margin-bottom: var(--space-sm); color: var(--brand-dark);">
+          Ready to Modernize Your Expense Operations?
+        </h2>
+        <p
+          style="max-width: 600px; margin: 0 auto var(--space-xl); color: var(--text-secondary); font-size: var(--font-md);">
+          Join forward-thinking finance teams who manage receipts, budgets, and reimbursements with ExpenseAI.
+        </p>
+        <div class="flex justify-center gap-md" style="flex-wrap: wrap;">
+          <a href="register.html" class="btn btn-primary btn-lg">
+            <span>Create Free Account</span>
+            <i data-lucide="arrow-right"></i>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-lg">
+            <i data-lucide="user-check"></i>
+            <span>Log in </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo-wrap" style="color: #FFFFFF;">
+            <div class="brand-logo-icon">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <div class="brand-logo-text" style="color: #FFFFFF;">Expense<span>AI</span></div>
+          </div>
+          <p>
+            The autonomous expense management platform designed for high-growth enterprises and modern finance teams.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="expenses.html">Expenses</a></li>
+            <li><a href="receipts.html">Receipt Scanner</a></li>
+            <li><a href="budgets.html">Budgets</a></li>
+            <li><a href="mileage.html">Mileage</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Workflows</div>
+          <ul class="footer-links">
+            <li><a href="approvals.html">Approvals</a></li>
+            <li><a href="reports.html">Reports & Exports</a></li>
+            <li><a href="assistant.html">AI Assistant</a></li>
+            <li><a href="integrations.html">Integrations</a></li>
+            <li><a href="settings.html">Policy Engine</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Company & Trust</div>
+          <ul class="footer-links">
+            <li><a href="#features">Compliance Engine</a></li>
+            <li><a href="#workflow">Approval Process</a></li>
+            <li><a href="login.html">Sign In</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 ExpenseAI Technologies Inc. All rights reserved.</div>
+        <div class="flex gap-lg">
+          <a href="#" style="color: inherit;">Privacy Policy</a>
+          <a href="#" style="color: inherit;">Terms of Service</a>
+          <a href="#" style="color: inherit;">Security Whitepaper</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // Dynamic Auth State Handler for Landing/Home
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const user = JSON.parse(localStorage.getItem('expenseai_user') || 'null');
+        if (user) {
+          const authActions = document.getElementById('landing-auth-actions');
+          if (authActions) {
+            authActions.innerHTML = `
+              <a href="dashboard.html" class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+                <i data-lucide="layout-dashboard" style="width:14px; height:14px;"></i>
+                <span>Open Dashboard</span>
+              </a>
+              <button onclick="handleHomeLogout()" class="btn btn-ghost btn-sm" title="Sign Out (${user.name})">
+                <i data-lucide="log-out" style="width:14px; height:14px;"></i>
+              </button>
+            `;
+            if (window.lucide) {
+              window.lucide.createIcons();
+            }
+          }
+        }
+      } catch (e) { }
+    });
+
+    function handleHomeLogout() {
+      localStorage.removeItem('expenseai_token');
+      localStorage.removeItem('expenseai_user');
+      window.location.reload();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Expense — ExpenseAI</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-header" id="app-header"></header>
+
+      <div class="app-content">
+        <div class="grid-2">
+          <!-- Left: Receipt Upload & AI OCR Scanner -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">
+                  <i data-lucide="scan-line" style="color: var(--brand-primary);"></i>
+                  Receipt Upload & AI Extraction
+                </div>
+                <div class="card-subtitle">Drop your receipt to extract merchant, total, and category</div>
+              </div>
+              <span class="accent-pill">Tesseract OCR</span>
+            </div>
+            <div class="card-body">
+              <!-- Dropzone -->
+              <div class="dropzone" id="receipt-dropzone" onclick="document.getElementById('receipt-file-input').click()">
+                <div class="dropzone-icon">
+                  <i data-lucide="cloud-upload" style="width: 28px; height: 28px;"></i>
+                </div>
+                <div class="dropzone-title">Upload Receipt Image or PDF</div>
+                <div class="dropzone-desc">Drag and drop PNG, JPG, or PDF (up to 10MB) or click to browse</div>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="event.stopPropagation(); document.getElementById('receipt-file-input').click()">
+                  <i data-lucide="folder-open"></i> Browse Files
+                </button>
+                <input type="file" id="receipt-file-input" accept="image/*,application/pdf" style="display: none;">
+              </div>
+
+              <!-- OCR Processing Progress Banner -->
+              <div id="ocr-loading" style="display: none; margin-top: var(--space-md); text-align: center; padding: 20px; background: var(--surface-card-subtle); border-radius: var(--radius-md); border: 1px solid var(--border-medium);">
+                <div class="spinner" style="margin: 0 auto 10px;"></div>
+                <div style="font-weight: 700; color: var(--brand-primary);">Extracting Receipt Metadata...</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Running optical character recognition & heuristic field matching</div>
+              </div>
+
+              <!-- Receipt Preview Thumbnail -->
+              <div id="receipt-preview-box" style="display: none; margin-top: var(--space-md);">
+                <div class="flex justify-between items-center" style="margin-bottom: 6px;">
+                  <span style="font-size: var(--font-xs); font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Attached Document</span>
+                  <button type="button" class="btn btn-ghost btn-sm" style="color: #DC2626; padding: 0 4px;" onclick="removeReceipt()">
+                    <i data-lucide="x"></i> Remove
+                  </button>
+                </div>
+                <div style="border: 1px solid var(--border-medium); border-radius: var(--radius-md); overflow: hidden; background: #000; text-align: center;">
+                  <img id="receipt-preview-img" src="" style="max-height: 220px; margin: 0 auto; object-fit: contain;">
+                </div>
+                <div id="ocr-confidence-badge" style="margin-top: 8px;"></div>
+              </div>
+
+              <!-- Sample Quick Receipts for Fast Evaluation -->
+              <div style="margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--border-subtle);">
+                <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">Fast Test Presets:</div>
+                <div class="flex gap-xs" style="flex-wrap: wrap;">
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="applyPreset('delta')">Delta Flight ($680)</button>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="applyPreset('starbucks')">Starbucks ($14.50)</button>
+                  <button type="button" class="btn btn-ghost btn-sm" onclick="applyPreset('aws')">AWS Cloud ($340)</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Expense Details Form -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Expense Details & Policy Audit</div>
+                <div class="card-subtitle">Verify details before filing for management approval</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="add-expense-form">
+                <input type="hidden" id="attached-receipt-id" value="">
+
+                <div class="form-group">
+                  <label class="form-label">Merchant / Vendor <span class="required">*</span></label>
+                  <input type="text" id="merchant" class="form-control" placeholder="e.g. Delta Air Lines, Staples, Uber" required>
+                </div>
+
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Amount <span class="required">*</span></label>
+                    <div class="input-group">
+                      <span class="input-prefix" id="currency-symbol">$</span>
+                      <input type="number" step="0.01" id="amount" class="form-control" placeholder="0.00" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Currency</label>
+                    <select id="currency" class="form-control">
+                      <option value="USD" selected>USD ($ - US Dollar)</option>
+                      <option value="EUR">EUR (€ - Euro)</option>
+                      <option value="GBP">GBP (£ - British Pound)</option>
+                      <option value="CAD">CAD (C$ - Canadian Dollar)</option>
+                      <option value="AUD">AUD (A$ - Australian Dollar)</option>
+                      <option value="JPY">JPY (¥ - Japanese Yen)</option>
+                      <option value="INR">INR (₹ - Indian Rupee)</option>
+                      <option value="CHF">CHF (Swiss Franc)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Category <span class="required">*</span></label>
+                    <select id="category" class="form-control" required>
+                      <option value="Travel">Travel (Flight, Rail)</option>
+                      <option value="Meals & Entertainment">Meals & Entertainment</option>
+                      <option value="Office Supplies">Office Supplies</option>
+                      <option value="Software & Subscriptions">Software & Subscriptions</option>
+                      <option value="Accommodation">Accommodation (Hotels)</option>
+                      <option value="Transportation">Transportation (Rideshare, Cab)</option>
+                      <option value="Utilities">Utilities</option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Equipment">Equipment</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Transaction Date <span class="required">*</span></label>
+                    <input type="date" id="date" class="form-control" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Payment Method</label>
+                  <select id="paymentMethod" class="form-control">
+                    <option value="Corporate Card">Corporate Card</option>
+                    <option value="Personal Card">Personal Card (Reimbursement)</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Business Purpose / Notes</label>
+                  <textarea id="description" class="form-control" placeholder="Provide business justification, project code, or client name..."></textarea>
+                </div>
+
+                <!-- Real-time Policy Preview Feedback Alert -->
+                <div id="live-policy-feedback" style="display: none; margin-bottom: var(--space-md);"></div>
+
+                <!-- Split Expense Accordion Toggle -->
+                <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px; margin-bottom: var(--space-md); background: var(--surface-card-subtle);">
+                  <div class="flex justify-between items-center">
+                    <label class="switch-label" style="font-weight: 600; font-size: 13.5px;">
+                      <span class="switch">
+                        <input type="checkbox" id="split-toggle" onchange="toggleSplitSection()">
+                        <span class="switch-slider"></span>
+                      </span>
+                      <span>Split Across Departments / Projects</span>
+                    </label>
+                  </div>
+
+                  <div id="split-section" style="display: none; margin-top: 12px;">
+                    <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
+                      Allocate portions of this expenditure to different cost centers. Sum must equal total amount.
+                    </div>
+                    <div id="split-rows-container"></div>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="addSplitRow()" style="margin-top: 8px;">
+                      <i data-lucide="plus"></i> Add Allocation Row
+                    </button>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-full btn-lg" id="submit-expense-btn">
+                  <i data-lucide="check-circle-2"></i>
+                  <span>Submit Expense for Approval</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/add-expense.js"></script>
+</body>
+</html>

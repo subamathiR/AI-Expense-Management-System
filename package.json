@@ -1,0 +1,32 @@
+{
+  "name": "expenseai",
+  "version": "1.0.0",
+  "description": "ExpenseAI — AI-Powered Expense Management System",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch --watch-path=frontend backend/server.js",
+    "seed": "node backend/seeds/seed.js",
+    "test": "node backend/tests/run-tests.js"
+  },
+  "keywords": [
+    "expense-management",
+    "ai",
+    "ocr",
+    "fintech",
+    "accounting",
+    "receipt-scanner"
+  ],
+  "author": "ExpenseAI Team",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "multer": "^1.4.5-lts.1",
+    "tesseract.js": "^5.1.1"
+  }
+}

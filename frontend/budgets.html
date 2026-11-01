@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Budgets — ExpenseAI</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-header" id="app-header"></header>
+
+      <div class="app-content">
+        <!-- Budget Controls Toolbar -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <select id="budget-dept-filter" class="form-control" style="width: 220px;" onchange="loadBudgets()">
+              <option value="All">All Departments</option>
+              <option value="Product & Engineering">Product & Engineering</option>
+              <option value="Sales & Marketing">Sales & Marketing</option>
+              <option value="Finance & Treasury">Finance & Treasury</option>
+              <option value="Operations & HR">Operations & HR</option>
+            </select>
+            <span class="category-tag"><i data-lucide="calendar"></i> Fiscal Year 2026</span>
+          </div>
+
+          <button class="btn btn-primary btn-sm" onclick="openBudgetModal()">
+            <i data-lucide="plus"></i> Set New Budget
+          </button>
+        </div>
+
+        <!-- Budget Cards Grid -->
+        <div class="grid-2" id="budgets-container" style="margin-bottom: var(--space-xl);">
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+            <div class="spinner" style="margin: 0 auto 10px;"></div>
+            Computing real-time budget balances...
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Create/Edit Budget Modal -->
+  <div class="modal-backdrop" id="budget-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="card-title">Configure Departmental Budget</div>
+        <button class="btn-icon" onclick="closeBudgetModal()"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="budget-form">
+          <div class="form-group">
+            <label class="form-label">Department <span class="required">*</span></label>
+            <select id="modal-dept" class="form-control" required>
+              <option value="Product & Engineering">Product & Engineering</option>
+              <option value="Sales & Marketing">Sales & Marketing</option>
+              <option value="Finance & Treasury">Finance & Treasury</option>
+              <option value="Operations & HR">Operations & HR</option>
+              <option value="General">General</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Expense Category <span class="required">*</span></label>
+            <select id="modal-category" class="form-control" required>
+              <option value="Travel">Travel</option>
+              <option value="Meals & Entertainment">Meals & Entertainment</option>
+              <option value="Office Supplies">Office Supplies</option>
+              <option value="Software & Subscriptions">Software & Subscriptions</option>
+              <option value="Accommodation">Accommodation</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Equipment">Equipment</option>
+            </select>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Monthly Limit ($) <span class="required">*</span></label>
+              <input type="number" step="100" id="modal-amount" class="form-control" placeholder="5000" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Alert Threshold (%)</label>
+              <input type="number" id="modal-threshold" class="form-control" value="80" placeholder="80">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Budget Description / Notes</label>
+            <input type="text" id="modal-notes" class="form-control" placeholder="Allocated initiatives or project tags">
+          </div>
+
+          <div class="flex justify-end gap-sm" style="margin-top: var(--space-lg);">
+            <button type="button" class="btn btn-secondary" onclick="closeBudgetModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="save-budget-btn">Save Budget Limit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/budgets.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — ExpenseAI</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+<body
+  style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 0%, var(--accent-mint-light) 0%, var(--bg-primary) 70%); padding: var(--space-lg); position: relative;">
+
+  <!-- Back to Home Button -->
+  <div style="position: absolute; top: 24px; left: 24px; z-index: 10;">
+    <a href="index.html" class="btn btn-ghost btn-sm"
+      style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid var(--border-subtle); border-radius: var(--radius-full); box-shadow: var(--shadow-sm); padding: 6px 14px; text-decoration: none; color: var(--text-primary); font-weight: 600;">
+      <i data-lucide="arrow-left" style="width: 15px; height: 15px;"></i>
+      <span>Back to Home</span>
+    </a>
+  </div>
+
+  <div style="width: 100%; max-width: 440px;">
+    <!-- Logo -->
+    <div class="text-center" style="margin-bottom: var(--space-xl);">
+      <a href="index.html" class="brand-logo-wrap" style="justify-content: center;">
+        <div class="brand-logo-icon">
+          <i data-lucide="sparkles"></i>
+        </div>
+        <div class="brand-logo-text" style="font-size: 26px;">Expense<span>AI</span></div>
+      </a>
+      <p style="font-size: var(--font-sm); margin-top: var(--space-xs);">Sign in to your financial operations workspace
+      </p>
+    </div>
+
+    <!-- Login Card -->
+    <div class="card" style="box-shadow: var(--shadow-xl); border: 1px solid var(--border-medium);">
+      <div class="card-body">
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label">Work Email <span class="required">*</span></label>
+            <div class="input-group">
+              <span class="input-icon-left"><i data-lucide="mail" style="width: 16px; height: 16px;"></i></span>
+              <input type="email" id="email" class="form-control input-has-icon-left" placeholder="name@company.com"
+                required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="flex justify-between items-center" style="margin-bottom: 4px;">
+              <label class="form-label" style="margin-bottom: 0;">Password <span class="required">*</span></label>
+              <a href="#" style="font-size: var(--font-xs); color: var(--brand-primary);">Forgot?</a>
+            </div>
+            <div class="input-group">
+              <span class="input-icon-left"><i data-lucide="lock" style="width: 16px; height: 16px;"></i></span>
+              <input type="text" id="password" class="form-control input-has-icon-left input-has-icon-right"
+                placeholder="At least 6 characters" required autocomplete="off" style="-webkit-text-security: disc;">
+              <button type="button" class="password-toggle-btn" id="toggle-password" aria-label="Show password"
+                title="Show password">
+                <i data-lucide="eye" id="toggle-password-icon" style="width: 16px; height: 16px;"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full" id="login-btn"
+            style="margin-top: var(--space-md); padding: 0.75rem;">
+            <span>Sign In</span>
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </form>
+      </div>
+      <div class="card-footer" style="justify-content: center; font-size: var(--font-xs);">
+        Don't have an account? <a href="register.html"
+          style="font-weight: 600; margin-left: 4px; color: var(--brand-primary);">Register New Workspace</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    lucide.createIcons();
+
+    // Prevent Chrome from auto-filling saved password
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const pass = document.getElementById('password');
+        if (pass) pass.value = '';
+      }, 50);
+    });
+
+    // Toggle Password Visibility
+    const passwordInput = document.getElementById('password');
+    const togglePasswordBtn = document.getElementById('toggle-password');
+
+    if (togglePasswordBtn && passwordInput) {
+      togglePasswordBtn.addEventListener('click', () => {
+        const isMasked = passwordInput.style.webkitTextSecurity !== 'none';
+        passwordInput.style.webkitTextSecurity = isMasked ? 'none' : 'disc';
+        togglePasswordBtn.innerHTML = isMasked
+          ? '<i data-lucide="eye-off" style="width: 16px; height: 16px;"></i>'
+          : '<i data-lucide="eye" style="width: 16px; height: 16px;"></i>';
+        togglePasswordBtn.setAttribute('title', isMasked ? 'Hide password' : 'Show password');
+        togglePasswordBtn.setAttribute('aria-label', isMasked ? 'Hide password' : 'Show password');
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+      });
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('login-btn');
+
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner"></span> <span>Signing in...</span>`;
+
+      try {
+        const res = await api.post('/auth/login', { email, password });
+        api.setToken(res.token);
+        api.setUser(res.user);
+        showToast(`Welcome back, ${res.user.name}!`, 'success');
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 500);
+      } catch (err) {
+        showToast(err.message, 'error');
+        btn.disabled = false;
+        btn.innerHTML = `<span>Sign In</span> <i data-lucide="arrow-right"></i>`;
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+
+</html>

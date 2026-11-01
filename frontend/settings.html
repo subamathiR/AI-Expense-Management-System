@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Policy & Settings — ExpenseAI</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-header" id="app-header"></header>
+
+      <div class="app-content">
+        <div class="grid-2">
+          <!-- User Profile Settings -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">
+                  <i data-lucide="user" style="color: var(--brand-primary);"></i>
+                  User Profile & Preferences
+                </div>
+                <div class="card-subtitle">Manage personal information and reporting currency</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="profile-form">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" id="profile-name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Work Email</label>
+                  <input type="email" id="profile-email" class="form-control" disabled style="background: var(--surface-muted);">
+                  <span class="form-hint">Email address is managed by corporate identity provider.</span>
+                </div>
+
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Assigned Department</label>
+                    <input type="text" id="profile-dept" class="form-control" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Preferred Reporting Currency</label>
+                    <select id="profile-currency" class="form-control">
+                      <option value="USD">USD ($)</option>
+                      <option value="EUR">EUR (€)</option>
+                      <option value="GBP">GBP (£)</option>
+                      <option value="CAD">CAD (C$)</option>
+                      <option value="AUD">AUD (A$)</option>
+                      <option value="JPY">JPY (¥)</option>
+                      <option value="INR">INR (₹)</option>
+                      <option value="CHF">CHF</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="save-profile-btn" style="margin-top: var(--space-md);">
+                  <i data-lucide="save"></i> Update Profile
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Quick Security & Role Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">
+                  <i data-lucide="shield" style="color: var(--brand-primary);"></i>
+                  Security & Access Role
+                </div>
+                <div class="card-subtitle">Current organizational authorization levels</div>
+              </div>
+              <span class="accent-pill" id="security-role-pill">Employee</span>
+            </div>
+            <div class="card-body">
+              <div style="background: var(--surface-card-subtle); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-medium); margin-bottom: var(--space-md);">
+                <div style="font-weight: 700; font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">Role Capabilities</div>
+                <ul style="padding-left: 18px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;" id="role-capabilities-list">
+                  <li>Record & categorize individual business expenditures</li>
+                  <li>Upload receipts with automated optical character extraction</li>
+                  <li>Submit consolidated expense statements for managerial review</li>
+                  <li>Log business transit mileage claims</li>
+                </ul>
+              </div>
+
+              <div class="flex justify-between items-center" style="font-size: 13px; color: var(--text-secondary);">
+                <span>Password Security:</span>
+                <span class="badge badge-approved"><i data-lucide="check"></i> 256-bit Bcrypt Encrypted</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Corporate Policy Management (Admins & Finance) -->
+        <div class="card" style="margin-top: var(--space-xl);">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <i data-lucide="sliders" style="color: var(--brand-primary);"></i>
+                Company Policy Compliance Engine Rules
+              </div>
+              <div class="card-subtitle">Configurable category spending ceilings, mandatory receipt limits, and approval thresholds</div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Per-Expense Limit</th>
+                  <th>Daily Ceiling</th>
+                  <th>Receipt Required Above</th>
+                  <th>Manager Threshold</th>
+                  <th>Status</th>
+                  <th style="text-align: center;">Rule Toggle</th>
+                </tr>
+              </thead>
+              <tbody id="policies-table-tbody">
+                <tr>
+                  <td colspan="7" style="text-align: center; padding: 25px; color: var(--text-muted);">
+                    Loading corporate policy rules...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>

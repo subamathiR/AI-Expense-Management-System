@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrations & ERP — ExpenseAI</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-header" id="app-header"></header>
+
+      <div class="app-content">
+        <!-- Header Info Card -->
+        <div class="card" style="margin-bottom: var(--space-xl); background: linear-gradient(135deg, var(--surface-card) 0%, var(--surface-card-subtle) 100%);">
+          <div class="card-body">
+            <div class="flex justify-between items-center" style="flex-wrap: wrap; gap: 12px;">
+              <div>
+                <h3 style="margin-bottom: 4px;">Third-Party Accounting & Vision Pipelines</h3>
+                <p style="font-size: 13.5px; max-width: 680px; margin-bottom: 0;">
+                  ExpenseAI integrates with major general ledger systems, optical character recognition engines, and central currency conversion services. Credentials and sandbox modes can be toggled per environment.
+                </p>
+              </div>
+              <span class="brand-pill"><i data-lucide="lock"></i> Encrypted Credential Vault</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Integrations Grid -->
+        <div class="grid-2" id="integrations-grid">
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted);">
+            <div class="spinner" style="margin: 0 auto 10px;"></div>
+            Loading provider connections...
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Configure Integration Modal -->
+  <div class="modal-backdrop" id="integration-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="card-title" id="int-modal-title">Configure Provider</div>
+        <button class="btn-icon" onclick="closeIntegrationModal()"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="integration-config-form">
+          <input type="hidden" id="int-id" value="">
+
+          <div class="form-group">
+            <label class="form-label">API Key / Token</label>
+            <input type="password" id="int-api-key" class="form-control" placeholder="••••••••••••••••">
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Client ID</label>
+              <input type="text" id="int-client-id" class="form-control" placeholder="client_id_optional">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Client Secret</label>
+              <input type="password" id="int-client-secret" class="form-control" placeholder="••••••••••••">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Endpoint URL / Realm ID</label>
+            <input type="text" id="int-endpoint" class="form-control" placeholder="https://api.provider.com/v1">
+          </div>
+
+          <div class="form-group">
+            <label class="switch-label">
+              <span class="switch">
+                <input type="checkbox" id="int-sandbox-toggle" checked>
+                <span class="switch-slider"></span>
+              </span>
+              <span>Enable Developer Sandbox / Test Mode</span>
+            </label>
+          </div>
+
+          <div class="flex justify-end gap-sm" style="margin-top: var(--space-lg);">
+            <button type="button" class="btn btn-secondary" onclick="closeIntegrationModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="save-int-btn">Save Configuration</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/integrations.js"></script>
+</body>
+</html>

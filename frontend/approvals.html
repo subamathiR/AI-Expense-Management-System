@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Approval & Reimbursement Queue — ExpenseAI</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <main class="app-main">
+      <header class="app-header" id="app-header"></header>
+
+      <div class="app-content">
+        <!-- Review Tabs Header -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <button class="btn btn-primary btn-sm approval-tab" onclick="switchApprovalTab('submitted', this)">
+              <i data-lucide="clock"></i> Pending Manager Review
+            </button>
+            <button class="btn btn-secondary btn-sm approval-tab" onclick="switchApprovalTab('approved', this)">
+              <i data-lucide="check-circle-2"></i> Ready for Reimbursement
+            </button>
+            <button class="btn btn-secondary btn-sm approval-tab" onclick="switchApprovalTab('All', this)">
+              <i data-lucide="list"></i> All Review History
+            </button>
+          </div>
+          <span class="brand-pill"><i data-lucide="shield-check"></i> Multi-Tier Gatekeeper Active</span>
+        </div>
+
+        <!-- Approvals Queue Cards -->
+        <div id="approvals-queue-container" style="display: flex; flex-direction: column; gap: var(--space-md);">
+          <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+            <div class="spinner" style="margin: 0 auto 10px;"></div>
+            Loading pending approval queue...
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Rejection Reason Modal -->
+  <div class="modal-backdrop" id="reject-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="card-title" style="color: #DC2626;">
+          <i data-lucide="x-circle"></i> Reject Expense Claim
+        </div>
+        <button class="btn-icon" onclick="closeRejectModal()"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="reject-expense-id" value="">
+        <div class="form-group">
+          <label class="form-label">Mandatory Rejection Explanation <span class="required">*</span></label>
+          <textarea id="rejection-reason" class="form-control" placeholder="Specify policy violation, missing tax receipt, or reason for rejection..."></textarea>
+          <span class="form-hint">This justification will be delivered immediately to the employee.</span>
+        </div>
+        <div class="flex justify-end gap-sm" style="margin-top: var(--space-lg);">
+          <button type="button" class="btn btn-secondary" onclick="closeRejectModal()">Cancel</button>
+          <button type="button" class="btn btn-danger" onclick="confirmRejection()">Confirm Rejection</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reimbursement Disburse Modal -->
+  <div class="modal-backdrop" id="reimburse-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="card-title" style="color: var(--brand-primary);">
+          <i data-lucide="landmark"></i> Process Reimbursement Settlement
+        </div>
+        <button class="btn-icon" onclick="closeReimburseModal()"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="reimburse-expense-id" value="">
+        <p style="font-size: 13.5px; margin-bottom: var(--space-md);">
+          Confirm ACH bank transfer disbursement for this manager-approved employee expense claim.
+        </p>
+        <div class="form-group">
+          <label class="form-label">ACH / ERP Payment Reference</label>
+          <input type="text" id="reimburse-ref" class="form-control" placeholder="TXN-ACH-004921">
+        </div>
+        <div class="flex justify-end gap-sm" style="margin-top: var(--space-lg);">
+          <button type="button" class="btn btn-secondary" onclick="closeReimburseModal()">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="confirmReimbursement()">Issue Payment & Settle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/approvals.js"></script>
+</body>
+</html>
