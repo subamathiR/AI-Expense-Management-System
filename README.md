@@ -1,9 +1,9 @@
 # ExpenseAI — AI-Powered Expense Management System
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render-00c7b7?style=for-the-badge&logo=render&logoColor=white)](https://ai-expense-management-system-7by0.onrender.com)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render-00c7b7?style=for-the-badge&logo=render&logoColor=white)](https://ai-expense-management-system-7bv9.onrender.com)
 [![GitHub License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
-> 🌐 **Live Website**: [https://ai-expense-management-system-7by0.onrender.com](https://ai-expense-management-system-7by0.onrender.com)  
+> 🌐 **Live Website**: [https://ai-expense-management-system-7bv9.onrender.com](https://ai-expense-management-system-7bv9.onrender.com)  
 > **Every Expense. Understood.**  
 > An autonomous, portfolio-grade enterprise expense management platform designed with an original visual identity (Warm Ivory & Deep Forest Green with Champagne Gold accents). Captures receipts with Optical Character Recognition (OCR), validates policy compliance with a deterministic rules engine, detects duplicate & anomalous claims, manages dynamic multi-tier approval workflows, and provides an authenticated natural-language financial AI assistant.
 
