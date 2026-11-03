@@ -239,20 +239,35 @@ async function processReceiptFile(filePath, originalFilename = 'receipt.jpg') {
   if (Tesseract && !isPdf) {
     try {
       console.log(`[OCR Service] Starting Tesseract recognition for ${originalFilename}...`);
-      const ocrPromise = Tesseract.recognize(filePath, 'eng', {
-        langPath: path.join(__dirname, '../../'),
+
+      // Determine langPath: use local eng.traineddata if it exists in project root,
+      // otherwise let Tesseract fall back to its CDN (works on Render and any cloud host)
+      const localTrainedDataDir = path.join(__dirname, '../../');
+      const localTrainedDataFile = path.join(localTrainedDataDir, 'eng.traineddata');
+      const useLocalLang = fs.existsSync(localTrainedDataFile);
+
+      const ocrOptions = {
         logger: () => {}, // silent in logs
-      });
-      // Safety timeout: generous 45s window
+      };
+      if (useLocalLang) {
+        ocrOptions.langPath = localTrainedDataDir;
+        console.log('[OCR Service] Using local eng.traineddata');
+      } else {
+        console.log('[OCR Service] Local traineddata not found — using CDN');
+      }
+
+      const ocrPromise = Tesseract.recognize(filePath, 'eng', ocrOptions);
+      // Safety timeout: 60s for CDN download + recognition on first cold run
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('OCR recognition timed out')), 45000)
+        setTimeout(() => reject(new Error('OCR recognition timed out after 60s')), 60000)
       );
 
       const result = await Promise.race([ocrPromise, timeoutPromise]);
       extractedText = (result && result.data && result.data.text) ? result.data.text : '';
       console.log(`[OCR Service] Extracted ${extractedText.length} characters.`);
     } catch (ocrErr) {
-      console.warn(`[OCR Service] Tesseract processing note: ${ocrErr.message}`);
+      console.warn(`[OCR Service] Tesseract skipped: ${ocrErr.message}`);
+      // Do NOT rethrow — let the request continue with empty text and graceful fallback
     }
   }
 
