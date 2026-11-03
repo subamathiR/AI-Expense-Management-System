@@ -82,7 +82,16 @@ const expenseSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      enum: ['Corporate Card', 'Personal Card', 'Cash', 'Bank Transfer', 'Other'],
+      enum: [
+        'Corporate Card',
+        'Corporate Card (Visa)',
+        'Corporate Card (Mastercard)',
+        'Corporate Card (AMEX)',
+        'Personal Card',
+        'Cash',
+        'Bank Transfer',
+        'Other',
+      ],
       default: 'Corporate Card',
     },
     description: {

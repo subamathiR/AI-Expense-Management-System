@@ -4,6 +4,31 @@ const { evaluateExpensePolicy } = require('../services/policyService');
 const { assessAnomalyRisk } = require('../services/fraudService');
 const { convertCurrency } = require('../services/currencyService');
 
+const ALLOWED_PAYMENT_METHODS = [
+  'Corporate Card',
+  'Corporate Card (Visa)',
+  'Corporate Card (Mastercard)',
+  'Corporate Card (AMEX)',
+  'Personal Card',
+  'Cash',
+  'Bank Transfer',
+  'Other',
+];
+
+function normalizePaymentMethod(method) {
+  if (!method) return 'Corporate Card';
+  if (ALLOWED_PAYMENT_METHODS.includes(method)) return method;
+  const lower = method.toLowerCase();
+  if (lower.includes('visa')) return 'Corporate Card (Visa)';
+  if (lower.includes('mastercard')) return 'Corporate Card (Mastercard)';
+  if (lower.includes('amex') || lower.includes('american express')) return 'Corporate Card (AMEX)';
+  if (lower.includes('corp') || lower.includes('credit')) return 'Corporate Card';
+  if (lower.includes('personal') || lower.includes('debit')) return 'Personal Card';
+  if (lower.includes('cash')) return 'Cash';
+  if (lower.includes('bank') || lower.includes('transfer') || lower.includes('wire')) return 'Bank Transfer';
+  return 'Other';
+}
+
 // @desc    Get expenses with filtering and pagination
 // @route   GET /api/expenses
 exports.getExpenses = async (req, res, next) => {
@@ -154,7 +179,7 @@ exports.createExpense = async (req, res, next) => {
       convertedAmount: conversion.convertedAmount,
       reportingCurrency: reportingCurrency.toUpperCase(),
       category: category || 'Other',
-      paymentMethod: paymentMethod || 'Corporate Card',
+      paymentMethod: normalizePaymentMethod(paymentMethod),
       description: description || '',
       receiptId: receiptId || null,
       receiptUrl,
@@ -218,7 +243,7 @@ exports.updateExpense = async (req, res, next) => {
       expense.exchangeRate = conversion.exchangeRate;
     }
     if (category) expense.category = category;
-    if (paymentMethod) expense.paymentMethod = paymentMethod;
+    if (paymentMethod) expense.paymentMethod = normalizePaymentMethod(paymentMethod);
     if (description !== undefined) expense.description = description;
     if (splitDetails) expense.splitDetails = splitDetails;
 
